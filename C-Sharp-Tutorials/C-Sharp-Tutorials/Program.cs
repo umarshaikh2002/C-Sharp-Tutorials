@@ -6,40 +6,62 @@ using System.Threading.Tasks;
 
 namespace C_Sharp_Tutorials
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            IFile file1 = new File();
+            //Employee employee = new Employee(10, 20);
+            //employee.Print();
+            //employee.Print(100);
 
-            File file2 = new File();
+            ////Employee employee2 = new Employee();
 
-            file1.ReadFile();
+            //Console.WriteLine(Employee.num3);
+            //Console.WriteLine(Employee.num4);
 
-            file1.WriteFile("Hello");
+            //Customer customer = new Customer();
 
-            file2.ReadFile();
+            CopyConstructorDemo copyConstructor = new CopyConstructorDemo(1, "Umar");
+            Console.WriteLine($"Id = {copyConstructor.Id} & Name = {copyConstructor.Name}");
+
+            //Copy contructor call
+            CopyConstructorDemo copyConstructor1 = new CopyConstructorDemo(copyConstructor);
+            Console.WriteLine($"Id = {copyConstructor1.Id} & Name = {copyConstructor1.Name}");
+
 
             Console.ReadKey();
-        }   
-    }
-
-    class File : IFile
-    {
-        public void ReadFile()
-        {
-            Console.WriteLine("Read file");
         }
 
-        public void WriteFile(string text)
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    interface IFile
+    public class Employee
     {
-        void ReadFile();
-        void WriteFile(string text);
+        int num1, num2;
+        public static int num3, num4;
+        static Employee()
+        {
+            Console.WriteLine("Default constructor");
+        }
+
+        public Employee(int a, int b)
+        {
+            num1 = a;
+            num2 = b;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"num1 = {num1} & num2 = {num2}");
+        }
+
+        public void Print(int a)
+        {
+            Console.WriteLine(a);
+        }
+
+        public void Print(int a, int b)
+        {
+            Console.WriteLine(a);
+        }
     }
 }
