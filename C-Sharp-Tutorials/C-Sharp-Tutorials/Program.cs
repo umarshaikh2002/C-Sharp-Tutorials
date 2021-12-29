@@ -10,58 +10,73 @@ namespace C_Sharp_Tutorials
     {
         static void Main(string[] args)
         {
-            //Employee employee = new Employee(10, 20);
-            //employee.Print();
-            //employee.Print(100);
+            IStudent student = new Student();
 
-            ////Employee employee2 = new Employee();
+            SW:
 
-            //Console.WriteLine(Employee.num3);
-            //Console.WriteLine(Employee.num4);
+            Console.WriteLine("Choose Option");
+            Console.WriteLine("1. Add");
+            Console.WriteLine("2. Remove");
+            Console.WriteLine("3. Get");
+            Console.WriteLine("4. Get All");
+            Console.WriteLine("5. Exit");
 
-            //Customer customer = new Customer();
+            int selection = int.Parse(Console.ReadLine());
 
-            CopyConstructorDemo copyConstructor = new CopyConstructorDemo(1, "Umar");
-            Console.WriteLine($"Id = {copyConstructor.Id} & Name = {copyConstructor.Name}");
+            switch (selection)
+            {
+                case 1:
+                    Student student1 = new Student();
+                    Console.WriteLine("Enter Id");
+                    student1.Id = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter Name");
+                    student1.Name = Console.ReadLine();
+                    Console.WriteLine("Enter City");
+                    student1.City = Console.ReadLine();
+                    Console.WriteLine("Enter Class");
+                    student1.Class = Console.ReadLine();
+                    Console.WriteLine("Enter Percentage");
+                    student1.Percentage = float.Parse(Console.ReadLine());
+                    student.Add(student1);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter Id");
+                    int id = int.Parse(Console.ReadLine());
+                    student.Remove(id);
+                    break;
 
-            //Copy contructor call
-            CopyConstructorDemo copyConstructor1 = new CopyConstructorDemo(copyConstructor);
-            Console.WriteLine($"Id = {copyConstructor1.Id} & Name = {copyConstructor1.Name}");
+                case 3:
+                    Console.WriteLine("Enter Id");
+                    id = int.Parse(Console.ReadLine());
+                    var s = student.GetStudent(id);
+                    Console.WriteLine($"id = {s.Id}");
+                    Console.WriteLine($"Name = {s.Name}");
+                    Console.WriteLine($"City = {s.City}");
+                    Console.WriteLine($"Class = {s.Class}");
+                    Console.WriteLine($"Percentage = {s.Percentage}");
+                    break;
+                case 4:
+                    var students = student.GetStudents();
 
+                    foreach (var std in students)
+                    {
+                        Console.WriteLine($"id = {std.Id}");
+                        Console.WriteLine($"Name = {std.Name}");
+                        Console.WriteLine($"City = {std.City}");
+                        Console.WriteLine($"Class = {std.Class}");
+                        Console.WriteLine($"Percentage = {std.Percentage}");
+                    }
+                    break;
+                case 5:
+                    return;
+                default:
+                    Console.WriteLine("Wrong selection");
+                    break;
+            }
+
+            goto SW;
 
             Console.ReadKey();
-        }
-
-    }
-
-    public class Employee
-    {
-        int num1, num2;
-        public static int num3, num4;
-        static Employee()
-        {
-            Console.WriteLine("Default constructor");
-        }
-
-        public Employee(int a, int b)
-        {
-            num1 = a;
-            num2 = b;
-        }
-
-        public void Print()
-        {
-            Console.WriteLine($"num1 = {num1} & num2 = {num2}");
-        }
-
-        public void Print(int a)
-        {
-            Console.WriteLine(a);
-        }
-
-        public void Print(int a, int b)
-        {
-            Console.WriteLine(a);
         }
     }
 }
