@@ -10,58 +10,84 @@ namespace C_Sharp_Tutorials
     {
         static void Main(string[] args)
         {
-            //Employee employee = new Employee(10, 20);
-            //employee.Print();
-            //employee.Print(100);
+            int[] nums = new int[5];
+            nums[0] = 1;
+            nums[1] = 2;
+            nums[2] = 3;
+            nums[3] = 4;
+            nums[4] = 5;
 
-            ////Employee employee2 = new Employee();
+            try
+            {
+                nums[5] = (int)6/1;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("1");
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("0");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("2");
+            }
 
-            //Console.WriteLine(Employee.num3);
-            //Console.WriteLine(Employee.num4);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.WriteLine(nums[i]);
+            }
 
-            //Customer customer = new Customer();
+            Console.WriteLine("--------------------------------------------------");
 
-            CopyConstructorDemo copyConstructor = new CopyConstructorDemo(1, "Umar");
-            Console.WriteLine($"Id = {copyConstructor.Id} & Name = {copyConstructor.Name}");
+            foreach (int i in nums)
+            {
+                Console.WriteLine(i);
+            }
 
-            //Copy contructor call
-            CopyConstructorDemo copyConstructor1 = new CopyConstructorDemo(copyConstructor);
-            Console.WriteLine($"Id = {copyConstructor1.Id} & Name = {copyConstructor1.Name}");
+            Console.WriteLine("--------------------------------------------------");
 
+            for (int i = nums.Length - 1; i >= 0; i--)
+            {
+                Console.WriteLine(nums[i]);
+            }
+
+            int index = Array.IndexOf(nums, 3);
+
+            Console.WriteLine("index at 1 " + index);
+
+            Console.WriteLine("------------------------two-dimensional Array--------------------------");
+
+            //int[,,] arr3d = new int[2, 2, 2] {
+            //    {
+            //        {1, 2},
+            //        {3, 4}
+            //    },
+            //    {
+            //        {5, 6},
+            //        {7, 8}
+            //    }
+
+            //    };
+
+            //Console.WriteLine(arr3d[1, 0, 1]);
+
+            int[,] arr2d = new int[2, 2] {
+                    {1, 2},
+                    {3, 4}
+                };
+
+            for(int i = 0;i < arr2d.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr2d.GetLength(1); j++)
+                {
+                    Console.WriteLine(arr2d[i, j]);
+                }
+            }
 
             Console.ReadKey();
         }
 
-    }
-
-    public class Employee
-    {
-        int num1, num2;
-        public static int num3, num4;
-        static Employee()
-        {
-            Console.WriteLine("Default constructor");
-        }
-
-        public Employee(int a, int b)
-        {
-            num1 = a;
-            num2 = b;
-        }
-
-        public void Print()
-        {
-            Console.WriteLine($"num1 = {num1} & num2 = {num2}");
-        }
-
-        public void Print(int a)
-        {
-            Console.WriteLine(a);
-        }
-
-        public void Print(int a, int b)
-        {
-            Console.WriteLine(a);
-        }
     }
 }
