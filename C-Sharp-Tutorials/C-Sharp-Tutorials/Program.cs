@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace C_Sharp_Tutorials
@@ -10,58 +12,49 @@ namespace C_Sharp_Tutorials
     {
         static void Main(string[] args)
         {
-            //Employee employee = new Employee(10, 20);
-            //employee.Print();
-            //employee.Print(100);
+            Student newStudent = null;
 
-            ////Employee employee2 = new Employee();
+            try
+            {
+                newStudent = new Student();
+                newStudent.StudentName = "James";
 
-            //Console.WriteLine(Employee.num3);
-            //Console.WriteLine(Employee.num4);
-
-            //Customer customer = new Customer();
-
-            CopyConstructorDemo copyConstructor = new CopyConstructorDemo(1, "Umar");
-            Console.WriteLine($"Id = {copyConstructor.Id} & Name = {copyConstructor.Name}");
-
-            //Copy contructor call
-            CopyConstructorDemo copyConstructor1 = new CopyConstructorDemo(copyConstructor);
-            Console.WriteLine($"Id = {copyConstructor1.Id} & Name = {copyConstructor1.Name}");
+                ValidateStudent(newStudent);
+            }
+            catch (InvalidStudentNameException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
 
             Console.ReadKey();
         }
 
+        private static void ValidateStudent(Student std)
+        {
+            Regex regex = new Regex("^[a-zA-Z]+$");
+
+            if (!regex.IsMatch(std.StudentName))
+                throw new InvalidStudentNameException(std.StudentName);
+
+        }
     }
 
-    public class Employee
+    [Serializable]
+    class InvalidStudentNameException : Exception
     {
-        int num1, num2;
-        public static int num3, num4;
-        static Employee()
-        {
-            Console.WriteLine("Default constructor");
-        }
+        public InvalidStudentNameException() { }
 
-        public Employee(int a, int b)
+        public InvalidStudentNameException(string name)
+            : base(String.Format("Invalid Student Name: {0}", name))
         {
-            num1 = a;
-            num2 = b;
-        }
 
-        public void Print()
-        {
-            Console.WriteLine($"num1 = {num1} & num2 = {num2}");
         }
+    }
 
-        public void Print(int a)
-        {
-            Console.WriteLine(a);
-        }
-
-        public void Print(int a, int b)
-        {
-            Console.WriteLine(a);
-        }
+    class Student
+    {
+        public int StudentID { get; set; }
+        public string StudentName { get; set; }
     }
 }
